@@ -230,6 +230,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          */
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
         telemetry.addData("Triggers", "left (%.2f, right (%.2f)",gamepad1.left_trigger, gamepad1.right_trigger);
+        telemetry.addData("Flywheel ", "speed (%.2f)",launcher.getVelocity());
     }
 
     /*
@@ -290,8 +291,13 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
         if (gamepad1.right_bumper && launcher.getVelocity() > LAUNCHER_MIN_VELOCITY) {
             windmillServo.setPower(1);
             intakePower += 0.5;
-        } else {
+        }
+        else if (gamepad1.left_bumper ) {
+            windmillServo.setPower(-1);
+        }
+        else {
             windmillServo.setPower(0);
         }
+
     }
 }
